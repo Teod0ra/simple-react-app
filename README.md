@@ -30,6 +30,19 @@ npm install
 ```
 **Frontend**
 ```
+cd ../client
+npm install
+```
+### Run the app
+**Start the backend server**
+```
+cd server
+node server.js
+```
+
+**Start the frontend server**  
+Open in new terminal
+```
 cd client
 npm start
 ```
