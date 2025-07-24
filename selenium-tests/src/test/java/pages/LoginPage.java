@@ -9,6 +9,7 @@ public class LoginPage {
     private By usernameInput = By.cssSelector("input[placeholder='Username']");
     private By passwordInput = By.cssSelector("input[placeholder='Password']");
     private By loginButton = By.cssSelector("button");
+    private By errorMessage = By.className("error");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -24,6 +25,10 @@ public class LoginPage {
 
     public void clickLogin() {
         driver.findElement(loginButton).click();
+    }
+
+    public String getErrorMessage() {
+        return driver.findElement(errorMessage).getText();
     }
 
     public void loginAs(String username, String password) {

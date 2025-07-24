@@ -69,7 +69,7 @@ const App = () => {
 
     return (
         <div className="container">
-            <h1>📚 Library Booking System</h1>
+            <h1>Library Booking System</h1>
             <div className="form">
                 <input placeholder="Book Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
                 <input placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
