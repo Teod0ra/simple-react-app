@@ -71,17 +71,17 @@ const App = () => {
         <div className="container">
             <h1>Library Booking System</h1>
             <div className="form">
-                <input placeholder="Book Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
-                <input placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)}/>
-                <button onClick={handleSubmit}>{editId ? 'Update' : 'Add'} Book</button>
+                <input placeholder="Book Title" data-id="bookTitle" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <input placeholder="Author" data-id="bookAuthor" value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                <button data-id="addUpdateBook" onClick={handleSubmit}>{editId ? 'Update' : 'Add'} Book</button>
             </div>
             <ul className="book-list">
                 {books.map((book) => (
                     <li key={book.id}>
                         <strong>{book.title}</strong> by {book.author}
                         <div className="actions">
-                            <button className="edit" onClick={() => handleEdit(book)}>Edit</button>
-                            <button className="delete" onClick={() => handleDelete(book.id)}>Delete</button>
+                            <button className="edit" data-id="editBook" onClick={() => handleEdit(book)}>Edit</button>
+                            <button className="delete" data-id="deleteBook" onClick={() => handleDelete(book.id)}>Delete</button>
                         </div>
                     </li>
                 ))}

@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
-    private WebDriver driver;
+    private final WebDriver driver;
 
-    private By usernameInput = By.cssSelector("input[placeholder='Username']");
-    private By passwordInput = By.cssSelector("input[placeholder='Password']");
-    private By loginButton = By.cssSelector("button");
-    private By errorMessage = By.className("error");
+    private final By usernameInput = By.cssSelector("input[placeholder='Username']");
+    private final By passwordInput = By.cssSelector("input[placeholder='Password']");
+    private final By loginButton = By.cssSelector("button");
+    private final By errorMessage = By.className("error");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;

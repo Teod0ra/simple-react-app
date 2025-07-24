@@ -1,5 +1,6 @@
 package tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -33,8 +34,7 @@ public class LoginTests {
 
     @Test
     public void testValidLogin() {
-        loginPage.loginAs("admin", "1234");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        authenticate();
         Assert.assertEquals(libraryPage.getLibraryAppHeaderText(), TestData.LIBRARY_APP_HEADER);
     }
 
@@ -45,13 +45,10 @@ public class LoginTests {
         Assert.assertEquals(loginPage.getErrorMessage(), TestData.LOGIN_ERROR_MESSAGE);
     }
 
-    @Test
-    public void createBookAndCheckIfVisible() {
-        loginPage.loginAs("admin", "wrong");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+    private void authenticate() {
+        loginPage.loginAs("admin", "1234");
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
-
 
     @AfterClass
     public void teardown() {
