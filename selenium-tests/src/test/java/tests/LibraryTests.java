@@ -30,12 +30,13 @@ public class LibraryTests {
         loginPage = new LoginPage(driver);
         libraryPage = new LibraryPage(driver);
     }
+
     @Test
     public void createBookAndCheckIfVisible() {
         authenticate();
-        libraryPage.addBook(TestData.BOOK_LOTR_TITLE,TestData.BOOK_LOTR_AUTHOR);
+        libraryPage.addBook(TestData.BOOK_LOTR_TITLE, TestData.BOOK_LOTR_AUTHOR);
         WebElement newBook = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(String.format(XPATH_BOOK_TITLE,TestData.BOOK_LOTR_TITLE))
+                By.xpath(String.format(XPATH_BOOK_TITLE, TestData.BOOK_LOTR_TITLE))
         ));
         Assert.assertTrue(newBook.isDisplayed());
     }
@@ -43,9 +44,9 @@ public class LibraryTests {
     @Test
     public void editBookAndCheckCorrectData() {
         authenticate();
-        libraryPage.editBook(TestData.BOOK_UPDATED_TITLE,TestData.BOOK_UPDATED_AUTHOR);
+        libraryPage.editBook(TestData.BOOK_UPDATED_TITLE, TestData.BOOK_UPDATED_AUTHOR);
         WebElement newBook = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(String.format(XPATH_BOOK_TITLE,TestData.BOOK_UPDATED_TITLE))
+                By.xpath(String.format(XPATH_BOOK_TITLE, TestData.BOOK_UPDATED_TITLE))
         ));
         Assert.assertTrue(newBook.isDisplayed());
     }
@@ -55,7 +56,7 @@ public class LibraryTests {
         authenticate();
         libraryPage.deleteBook(TestData.BOOK_LOTR_TITLE);
         Boolean deletedBook = wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.xpath(String.format(XPATH_BOOK_TITLE,TestData.BOOK_LOTR_TITLE))
+                By.xpath(String.format(XPATH_BOOK_TITLE, TestData.BOOK_LOTR_TITLE))
         ));
         Assert.assertTrue(deletedBook);
     }
