@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 
 public class LibraryApiTests extends BaseTest {
     @Test
@@ -89,4 +88,16 @@ public class LibraryApiTests extends BaseTest {
                 .then()
                 .statusCode(404);
     }
+
+    @Test
+    public void getAllBooks() {
+        given()
+                .when()
+                .get("/books")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("$", isA(java.util.List.class));
+    }
+
 }
