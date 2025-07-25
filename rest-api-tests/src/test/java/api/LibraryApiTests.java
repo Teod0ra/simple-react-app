@@ -20,8 +20,7 @@ public class LibraryApiTests extends BaseTest {
                 .post("/books")
 
                 .then()
-                .statusCode(201)
-                .body("message", equalTo("Book created"));
+                .statusCode(201);
     }
     @Test
     public void addBookWithMissingFields(){

@@ -7,4 +7,6 @@ public class TestData {
     public static final String BOOK_LOTR_AUTHOR = "J.R.R. Tolkien";
     public static final String BOOK_UPDATED_TITLE = "Fantastic Beasts and Where to Find Them";
     public static final String BOOK_UPDATED_AUTHOR = "J. K. Rowling";
+    public static final String BOOK_DELETED_TITLE = "To be deleted";
+    public static final String BOOK_DELETED_AUTHOR = "To be deleted";
 }

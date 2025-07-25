@@ -17,13 +17,16 @@ public class LibraryPage {
     private final By bookAuthorInput = By.cssSelector("input[data-id='bookAuthor']");
     private final By submitButton = By.cssSelector("button[data-id='addUpdateBook']");
     private final By editBookButton = By.xpath(String.format(XPATH_EDIT_BOOK_ITEM, TestData.BOOK_LOTR_TITLE));
-    private final By deleteBookButton = By.xpath(String.format(XPATH_DELETE_BOOK_ITEM, TestData.BOOK_LOTR_TITLE));
+    private final By deleteBookButton = By.xpath(String.format(XPATH_DELETE_BOOK_ITEM, TestData.BOOK_DELETED_TITLE));
     private final By libraryAppHeader = By.cssSelector("h1");
 
     public LibraryPage(WebDriver driver) {
         this.driver = driver;
     }
 
+    public By getLibraryAppHeader() {
+        return libraryAppHeader;
+    }
     public String getLibraryAppHeaderText() {
         return driver.findElement(libraryAppHeader).getText();
     }
@@ -51,7 +54,7 @@ public class LibraryPage {
         driver.findElement(submitButton).click();
     }
     public void deleteBook(String title) {
-        addBook(TestData.BOOK_LOTR_TITLE, TestData.BOOK_LOTR_AUTHOR);
+        addBook(TestData.BOOK_DELETED_TITLE, TestData.BOOK_DELETED_AUTHOR);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteBookButton));
         driver.findElement(deleteBookButton).click();
