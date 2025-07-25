@@ -29,8 +29,16 @@ app.get('/api/books', (req, res) => {
 
 app.post('/api/books', (req, res) => {
     const { title, author } = req.body;
-    books.push({ id: idCounter++, title, author });
-    res.sendStatus(201);
+    if (!title || !author) {
+        return res.status(400).json({ error: 'Both title and author are required.' });
+    }
+    const newBook = {
+        id: idCounter++,
+        title,
+        author
+    };
+    books.push(newBook);
+    res.status(201).json(newBook);
 });
 
 app.put('/api/books/:id', (req, res) => {

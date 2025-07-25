@@ -1,29 +1,92 @@
 package api;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
 
 public class LibraryApiTests extends BaseTest {
     @Test
-    public void loginWithValidCredentials() {
+    public void addBookAndVerify() {
+
+                given()
+                .contentType(ContentType.JSON)
+                .body("{ \"title\": \"API Testing Book\", \"author\": \"Me\" }")
+
+                .when()
+                .post("/books")
+
+                .then()
+                .statusCode(201)
+                .body("message", equalTo("Book created"));
+    }
+    @Test
+    public void addBookWithMissingFields(){
+
+                given()
+                .contentType("application/json")
+                .body("{ \"title\": \"Error expected\" }")
+
+                .when()
+                .post("/books")
+
+                .then()
+                .statusCode(400)
+                .body("error", containsString("author"));
+
+    }
+    @Test
+    public void wrongEndpoint(){
+
+        given()
+                .contentType("application/json")
+                .body("{ \"title\": \"API Testing Book\", \"author\": \"Me\" }")
+
+                .when()
+                .post("/boks")
+
+                .then()
+                .statusCode(404);
+
+    }
+
+
+    @Test
+    public void editBookAndVerify() {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .body("{ \"title\": \"Harry Potter\", \"author\": \"J.K. Rowling\" }")
+                .when()
+                .post("/books");
+
+        response.prettyPrint();
+        int id = response.jsonPath().getInt("id");
+
         given()
                 .contentType(ContentType.JSON)
-                .body("{ \"username\": \"admin\", \"password\": \"1234\" }")
+                .body("{ \"title\": \"Harry Potter and the Philosopher's Stone\", \"author\": \"J.K.Rowling\" }")
+
                 .when()
-                .post("/login")
+                .put("/books/" + id)
+
                 .then()
                 .statusCode(200);
     }
+
     @Test
-    public void testLoginWithInvalidCredentials() {
+    public void editBookMissingId() {
         given()
                 .contentType(ContentType.JSON)
-                .body("{ \"username\": \"admin\", \"password\": \"wrong\" }")
+                .body("{ \"title\": \"Harry Potter and the Philosopher's Stone\", \"author\": \"J.K.Rowling\" }")
+
                 .when()
-                .post("/login")
+                .put("/books/9999")
+
                 .then()
-                .statusCode(401);
+                .statusCode(404);
     }
 }
