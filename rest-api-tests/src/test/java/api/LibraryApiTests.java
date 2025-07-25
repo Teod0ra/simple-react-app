@@ -100,4 +100,30 @@ public class LibraryApiTests extends BaseTest {
                 .body("$", isA(java.util.List.class));
     }
 
+    @Test
+    public void deleteBookAndVerify() {
+        int id = given()
+                .contentType(ContentType.JSON)
+                .body("{ \"title\": \"Delete\", \"author\": \"Delete\" }")
+                .post("/books")
+                .then()
+                .statusCode(201)
+                .extract().path("id");
+
+        given()
+                .when()
+                .delete("/books/" + id)
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    public void deleteBookNotExisting() {
+        given()
+                .when()
+                .delete("/books/99999")
+                .then()
+                .statusCode(404);
+    }
+
 }
